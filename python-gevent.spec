@@ -3,13 +3,16 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       1.1.2
-Release:       5%{?dist}
+Version:       1.2.2
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
 URL:           http://www.gevent.org/
-Source0:       https://github.com/gevent/gevent/releases/download/v%{version}/%{modname}-%{version}.tar.gz
+Source0:       https://files.pythonhosted.org/packages/source/g/%{modname}/%{modname}-%{version}.tar.gz
+
+# https://github.com/gevent/gevent/pull/979
+Patch1:        0001-always-obey-GEVENT_NO_CFFI_BUILD.patch
 
 BuildRequires: c-ares-devel
 BuildRequires: libev-devel
@@ -72,13 +75,23 @@ Python 3 version.
 %prep
 %autosetup -n %{modname}-%{version}
 # Remove bundled libraries
-rm -rf c-ares libev
+rm -r deps
+# Upstream intentionally includes C extension sources in the built package, 
+# because... reasons (PyPy I think?) however we do not want that. Sources will 
+# go into debuginfo as normal.
+sed -i -e 's/include_package_data=True/include_package_data=False/' setup.py
 
 %build
+export LIBEV_EMBED=0
+export CARES_EMBED=0
+export GEVENT_NO_CFFI_BUILD=1
 %py2_build
 %py3_build
 
 %install
+export LIBEV_EMBED=0
+export CARES_EMBED=0
+export GEVENT_NO_CFFI_BUILD=1
 %py2_install
 %py3_install
 rm %{buildroot}%{python2_sitearch}/%{modname}/_*3.py*
@@ -99,6 +112,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Wed Aug 09 2017 Dan Callaghan <dcallagh@redhat.com> - 1.2.2-1
+- Update to 1.2.2 (RHBZ#1389634)
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.2-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
