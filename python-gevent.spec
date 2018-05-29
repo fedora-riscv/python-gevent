@@ -3,16 +3,13 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       1.2.2
-Release:       2%{?dist}
+Version:       1.3.1
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
 URL:           http://www.gevent.org/
 Source0:       https://files.pythonhosted.org/packages/source/g/%{modname}/%{modname}-%{version}.tar.gz
-
-# https://github.com/gevent/gevent/pull/979
-Patch1:        0001-always-obey-GEVENT_NO_CFFI_BUILD.patch
 
 BuildRequires: c-ares-devel
 BuildRequires: libev-devel
@@ -34,6 +31,7 @@ Features include:
 Summary:       %{summary}
 %{?python_provide:%python_provide python2-%{modname}}
 BuildRequires: python2-devel
+BuildRequires: python2-greenlet-devel
 Requires:      python2-greenlet
 
 %description -n python2-%{modname}
@@ -55,6 +53,7 @@ Python 2 version.
 Summary:       %{summary}
 %{?python_provide:%python_provide python3-%{modname}}
 BuildRequires: python3-devel
+BuildRequires: python3-greenlet-devel
 Requires:      python3-greenlet
 
 %description -n python3-%{modname}
@@ -112,6 +111,10 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Tue May 29 2018 Dan Callaghan <dcallagh@redhat.com> - 1.3.1-1
+- Update to 1.3.1 (RHBZ#1552352)
+  http://www.gevent.org/whatsnew_1_3.html
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
