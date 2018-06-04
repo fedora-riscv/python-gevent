@@ -3,7 +3,7 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       1.3.1
+Version:       1.3.2
 Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
@@ -111,6 +111,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Mon Jun 04 2018 Dan Callaghan <dcallagh@redhat.com> - 1.3.2-1
+- Update to 1.3.2 (RHBZ#1583647)
+
 * Tue May 29 2018 Dan Callaghan <dcallagh@redhat.com> - 1.3.1-1
 - Update to 1.3.1 (RHBZ#1552352)
   http://www.gevent.org/whatsnew_1_3.html
