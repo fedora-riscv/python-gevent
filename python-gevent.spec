@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       1.3.3
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -111,6 +111,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Mon Jun 18 2018 Miro Hrončok <mhroncok@redhat.com> - 1.3.3-2
+- Rebuilt for Python 3.7
+
 * Wed Jun 13 2018 Dan Callaghan <dcallagh@redhat.com> - 1.3.3-1
 - Update to 1.3.3 (RHBZ#1589102)
 
