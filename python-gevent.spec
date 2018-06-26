@@ -3,8 +3,8 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       1.3.3
-Release:       2%{?dist}
+Version:       1.3.4
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -111,6 +111,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Tue Jun 26 2018 Dan Callaghan <dcallagh@redhat.com> - 1.3.4-1
+- Update to 1.3.4 (RHBZ#1593266)
+
 * Mon Jun 18 2018 Miro Hrončok <mhroncok@redhat.com> - 1.3.3-2
 - Rebuilt for Python 3.7
 
