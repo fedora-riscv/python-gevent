@@ -11,6 +11,7 @@ License:       MIT
 URL:           http://www.gevent.org/
 Source0:       https://files.pythonhosted.org/packages/source/g/%{modname}/%{modname}-%{version}.tar.gz
 
+BuildRequires:  gcc
 BuildRequires: c-ares-devel
 BuildRequires: libev-devel
 
