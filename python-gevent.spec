@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       1.3.4
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -112,6 +112,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Mon Jul 02 2018 Miro Hrončok <mhroncok@redhat.com> - 1.3.4-2
 - Rebuilt for Python 3.7
 
