@@ -3,8 +3,8 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       1.3.4
-Release:       3%{?dist}
+Version:       1.3.6
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -112,6 +112,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Mon Sep 17 2018 Dan Callaghan <dcallagh@redhat.com> - 1.3.6-1
+- Upstream bug fix release 1.3.6: http://www.gevent.org/changelog.html
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
