@@ -54,6 +54,7 @@ Python 2 version.
 Summary:       %{summary}
 %{?python_provide:%python_provide python3-%{modname}}
 BuildRequires: python3-devel
+BuildRequires: python3-Cython
 BuildRequires: python3-greenlet-devel
 Requires:      python3-greenlet
 
@@ -81,12 +82,16 @@ rm -r deps
 # go into debuginfo as normal.
 sed -i -e 's/include_package_data=True/include_package_data=False/' setup.py
 
+# Force re-cythonizing the sources
+rm src/gevent/*.c src/gevent/libev/_*.c
+
 %build
 export LIBEV_EMBED=0
 export CARES_EMBED=0
 export GEVENT_NO_CFFI_BUILD=1
-%py2_build
+# Build Python 3 first to use Python 3 Cython
 %py3_build
+%py2_build
 
 %install
 export LIBEV_EMBED=0
