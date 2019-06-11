@@ -4,12 +4,17 @@
 
 Name:          python-%{modname}
 Version:       1.3.6
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
 URL:           http://www.gevent.org/
 Source0:       https://files.pythonhosted.org/packages/source/g/%{modname}/%{modname}-%{version}.tar.gz
+
+# Python 3.8 compatibility: use code.replace() method
+# https://github.com/gevent/gevent/pull/1429
+# https://github.com/gevent/gevent/commit/806713333afa9d490d31c0f9b534031c07467fc7
+Patch1:        0001-code-replace.patch
 
 BuildRequires:  gcc
 BuildRequires: c-ares-devel
@@ -74,7 +79,7 @@ Features include:
 Python 3 version.
 
 %prep
-%autosetup -n %{modname}-%{version}
+%autosetup -p1 -n %{modname}-%{version}
 # Remove bundled libraries
 rm -r deps
 # Upstream intentionally includes C extension sources in the built package, 
@@ -117,6 +122,10 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Tue Jun 11 2019 Victor Stinner <vstinner@redhat.com> - 1.3.6-3
+- Add Python 3.8 support, backport upstream change to use CodeType.replace() if
+  available (rhbz#1716342)
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
