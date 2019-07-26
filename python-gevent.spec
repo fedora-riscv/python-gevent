@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       1.3.6
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -122,6 +122,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.6-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Tue Jun 11 2019 Victor Stinner <vstinner@redhat.com> - 1.3.6-3
 - Add Python 3.8 support, backport upstream change to use CodeType.replace() if
   available (rhbz#1716342)
