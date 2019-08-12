@@ -1,10 +1,10 @@
-%global __provides_exclude_from ^%{python2_sitearch}/.*\\.so$ ^%{python3_sitearch}/.*\\.so$
+%global __provides_exclude_from ^%{python3_sitearch}/.*\\.so$
 %global modname gevent
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
 Version:       1.3.6
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -32,28 +32,6 @@ Features include:
   * WSGI server on top of libevent-http
   * DNS requests done through libevent-dns
   * monkey patching utility to get pure Python modules to cooperate
-
-%package -n python2-%{modname}
-Summary:       %{summary}
-%{?python_provide:%python_provide python2-%{modname}}
-BuildRequires: python2-devel
-BuildRequires: python2-greenlet-devel
-Requires:      python2-greenlet
-
-%description -n python2-%{modname}
-gevent is a coroutine-based Python networking library that uses greenlet to
-provide a high-level synchronous API on top of libevent event loop.
-
-Features include:
-
-  * convenient API around greenlets
-  * familiar synchronization primitives (gevent.event, gevent.queue)
-  * socket module that cooperates
-  * WSGI server on top of libevent-http
-  * DNS requests done through libevent-dns
-  * monkey patching utility to get pure Python modules to cooperate
-
-Python 2 version.
 
 %package -n python3-%{modname}
 Summary:       %{summary}
@@ -96,25 +74,17 @@ export CARES_EMBED=0
 export GEVENT_NO_CFFI_BUILD=1
 # Build Python 3 first to use Python 3 Cython
 %py3_build
-%py2_build
 
 %install
 export LIBEV_EMBED=0
 export CARES_EMBED=0
 export GEVENT_NO_CFFI_BUILD=1
-%py2_install
 %py3_install
-rm %{buildroot}%{python2_sitearch}/%{modname}/_*3.py*
 rm %{buildroot}%{python3_sitearch}/%{modname}/_*2.py
 rm %{buildroot}%{python3_sitearch}/%{modname}/__pycache__/_*2.*
 find %{buildroot} -name '.buildinfo' -delete
 # Correct the permissions.
 find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
-
-%files -n python2-%{modname}
-%license LICENSE
-%doc README.rst
-%{python2_sitearch}/%{modname}*
 
 %files -n python3-%{modname}
 %license LICENSE
@@ -122,6 +92,10 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Mon Aug 12 2019 Miro Hrončok <mhroncok@redhat.com> - 1.3.6-5
+- Subpackage python2-gevent has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.6-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
