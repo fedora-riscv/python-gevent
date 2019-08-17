@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       1.3.6
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -92,6 +92,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Sat Aug 17 2019 Miro Hrončok <mhroncok@redhat.com> - 1.3.6-6
+- Rebuilt for Python 3.8
+
 * Mon Aug 12 2019 Miro Hrončok <mhroncok@redhat.com> - 1.3.6-5
 - Subpackage python2-gevent has been removed
   See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
