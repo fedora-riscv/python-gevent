@@ -1,20 +1,16 @@
 %global __provides_exclude_from ^%{python3_sitearch}/.*\\.so$
 %global modname gevent
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
+%global extraver a3
 
 Name:          python-%{modname}
-Version:       1.3.6
-Release:       7%{?dist}
+Version:       1.5
+Release:       0.1.%{extraver}%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
 URL:           http://www.gevent.org/
-Source0:       https://files.pythonhosted.org/packages/source/g/%{modname}/%{modname}-%{version}.tar.gz
-
-# Python 3.8 compatibility: use code.replace() method
-# https://github.com/gevent/gevent/pull/1429
-# https://github.com/gevent/gevent/commit/806713333afa9d490d31c0f9b534031c07467fc7
-Patch1:        0001-code-replace.patch
+Source0:       %{pypi_source %{modname} %{version}%{extraver} zip}
 
 BuildRequires:  gcc
 BuildRequires: c-ares-devel
@@ -57,7 +53,7 @@ Features include:
 Python 3 version.
 
 %prep
-%autosetup -p1 -n %{modname}-%{version}
+%autosetup -p1 -n %{modname}-%{version}%{extraver}
 # Remove bundled libraries
 rm -r deps
 # Upstream intentionally includes C extension sources in the built package, 
@@ -92,6 +88,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Wed Jan 08 2020 Robert-André Mauchin <zebob.m@gmail.com> - 1.5-0.1.a3
+- Update to 1.5a3 (#1705661)
+
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 1.3.6-7
 - Rebuilt for Python 3.8.0rc1 (#1748018)
 
