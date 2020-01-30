@@ -5,7 +5,7 @@
 
 Name:          python-%{modname}
 Version:       1.5
-Release:       0.1.%{extraver}%{?dist}
+Release:       0.2.%{extraver}%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -88,6 +88,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.5-0.2.a3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Wed Jan 08 2020 Robert-André Mauchin <zebob.m@gmail.com> - 1.5-0.1.a3
 - Update to 1.5a3 (#1705661)
 
