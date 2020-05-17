@@ -1,16 +1,15 @@
 %global __provides_exclude_from ^%{python3_sitearch}/.*\\.so$
 %global modname gevent
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
-%global extraver a3
 
 Name:          python-%{modname}
-Version:       1.5
-Release:       0.2.%{extraver}%{?dist}
+Version:       20.5.0
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
 URL:           http://www.gevent.org/
-Source0:       %{pypi_source %{modname} %{version}%{extraver} zip}
+Source0:       %{pypi_source %{modname} %{version} tar.gz}
 
 BuildRequires:  gcc
 BuildRequires: c-ares-devel
@@ -53,7 +52,7 @@ Features include:
 Python 3 version.
 
 %prep
-%autosetup -p1 -n %{modname}-%{version}%{extraver}
+%autosetup -p1 -n %{modname}-%{version}
 # Remove bundled libraries
 rm -r deps
 # Upstream intentionally includes C extension sources in the built package, 
@@ -88,6 +87,10 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Sun May 17 2020 Dan Callaghan <djc@djc.id.au> - 20.5.0-1
+- new upstream release 20.5.0:
+  https://github.com/gevent/gevent/blob/20.5.0/CHANGES.rst
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.5-0.2.a3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
