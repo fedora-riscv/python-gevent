@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       20.5.0
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -87,6 +87,9 @@ find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Sun May 24 2020 Miro Hrončok <mhroncok@redhat.com> - 20.5.0-2
+- Rebuilt for Python 3.9
+
 * Sun May 17 2020 Dan Callaghan <djc@djc.id.au> - 20.5.0-1
 - new upstream release 20.5.0:
   https://github.com/gevent/gevent/blob/20.5.0/CHANGES.rst
