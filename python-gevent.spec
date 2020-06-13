@@ -3,7 +3,7 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       20.6.0
+Version:       20.6.1
 Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
@@ -93,6 +93,9 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Sat Jun 13 2020 Dan Callaghan <djc@djc.id.au> - 20.6.1-1
+- new upstream release 20.6.1
+
 * Sat Jun 06 2020 Orion Poplawski <orion@nwra.com> - 20.6.0-1
 - Update to 20.6.0 (bz#1840109)
 - Resolve Python 3.9 issue (bz#1838696)
