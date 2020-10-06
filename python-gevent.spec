@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       20.6.1
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -35,6 +35,7 @@ Summary:       %{summary}
 BuildRequires: python3-devel
 BuildRequires: python3-Cython
 BuildRequires: python3-greenlet-devel >= 0.4.16
+BuildRequires: python3-setuptools
 # For tests
 BuildRequires: python3-dns
 BuildRequires: python3-psutil
@@ -93,6 +94,9 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Mon Oct 05 2020 Orion Poplawski <orion@nwra.com> - 20.6.1-3
+- BR python3-setuptools
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 20.6.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
