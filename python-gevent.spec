@@ -3,8 +3,8 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       20.6.1
-Release:       3%{?dist}
+Version:       20.9.0
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -34,13 +34,13 @@ Summary:       %{summary}
 %{?python_provide:%python_provide python3-%{modname}}
 BuildRequires: python3-devel
 BuildRequires: python3-Cython
-BuildRequires: python3-greenlet-devel >= 0.4.16
+BuildRequires: python3-greenlet-devel >= 0.4.17
 BuildRequires: python3-setuptools
 # For tests
 BuildRequires: python3-dns
 BuildRequires: python3-psutil
 BuildRequires: python3-zope-interface
-Requires:      python3-greenlet >= 0.4.16
+Requires:      python3-greenlet >= 0.4.17
 
 %description -n python3-%{modname}
 gevent is a coroutine-based Python networking library that uses greenlet to
@@ -94,6 +94,9 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Mon Nov 16 2020 Fabien Boucher <fboucher@redhat.com> - 20.9.0-1
+- new upstream release 20.9.0
+
 * Mon Oct 05 2020 Orion Poplawski <orion@nwra.com> - 20.6.1-3
 - BR python3-setuptools
 
