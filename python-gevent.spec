@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       21.1.2
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -94,6 +94,9 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 21.1.2-2
+- Rebuilt for Python 3.10
+
 * Mon Apr 26 2021 Dan Callaghan <djc@djc.id.au> - 21.1.2-1
 - new upstream bug fix release 21.1.2
 
