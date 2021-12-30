@@ -4,7 +4,7 @@
 
 Name:          python-%{modname}
 Version:       20.9.0
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -94,6 +94,9 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Fri Apr 16 2021 Mohan Boddu <mboddu@redhat.com> - 20.9.0-3
+- Rebuilt for RHEL 9 BETA on Apr 15th 2021. Related: rhbz#1947937
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 20.9.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
