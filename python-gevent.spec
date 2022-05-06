@@ -3,8 +3,8 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       20.9.0
-Release:       3%{?dist}
+Version:       21.12.0
+Release:       1%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
@@ -39,6 +39,7 @@ BuildRequires: python3-setuptools
 # For tests
 BuildRequires: python3-dns
 BuildRequires: python3-psutil
+BuildRequires: python3-zope-event
 BuildRequires: python3-zope-interface
 Requires:      python3-greenlet >= 0.4.17
 
@@ -94,8 +95,20 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
-* Fri Apr 16 2021 Mohan Boddu <mboddu@redhat.com> - 20.9.0-3
-- Rebuilt for RHEL 9 BETA on Apr 15th 2021. Related: rhbz#1947937
+* Sun Mar 06 2022 Orion Poplawski <orion@nwra.com> - 21.12.0-1
+- Update to 21.12.0
+
+* Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 21.1.2-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 21.1.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 21.1.2-2
+- Rebuilt for Python 3.10
+
+* Mon Apr 26 2021 Dan Callaghan <djc@djc.id.au> - 21.1.2-1
+- new upstream bug fix release 21.1.2
 
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 20.9.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
