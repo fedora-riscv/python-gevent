@@ -1,0 +1,69 @@
+From 5718d7f72eab3ac64a207ab6256e2810549f86cf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tom=C3=A1=C5=A1=20Hrn=C4=8Diar?= <thrnciar@redhat.com>
+Date: Wed, 17 May 2023 09:34:35 +0200
+Subject: [PATCH] Remove the usage of assertRaisesRegexp unit test alias
+ removed in Python 3.12
+
+---
+ src/gevent/testing/testcase.py             | 3 +--
+ src/gevent/tests/test___config.py          | 3 +--
+ src/gevent/tests/test__close_backend_fd.py | 3 +--
+ src/gevent/tests/test__contextvars.py      | 3 ---
+ 4 files changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/src/gevent/testing/testcase.py b/src/gevent/testing/testcase.py
+index 474840942..c96d57249 100644
+--- a/src/gevent/testing/testcase.py
++++ b/src/gevent/testing/testcase.py
+@@ -453,8 +453,7 @@ def assertEqualFlakyRaceCondition(self, a, b):
+         except AssertionError:
+             flaky.reraiseFlakyTestRaceCondition()
+ 
+-    assertRaisesRegex = getattr(BaseTestCase, 'assertRaisesRegex',
+-                                getattr(BaseTestCase, 'assertRaisesRegexp'))
++    assertRaisesRegex = BaseTestCase.assertRaisesRegex
+ 
+     def assertStartsWith(self, it, has_prefix):
+         self.assertTrue(it.startswith(has_prefix), (it, has_prefix))
+diff --git a/src/gevent/tests/test___config.py b/src/gevent/tests/test___config.py
+index 382ffd4a0..c5f6a9b5d 100644
+--- a/src/gevent/tests/test___config.py
++++ b/src/gevent/tests/test___config.py
+@@ -121,8 +121,7 @@ def test_set_invalid(self):
+ 
+ class TestImportableSetting(unittest.TestCase):
+ 
+-    assertRaisesRegex = getattr(unittest.TestCase, 'assertRaisesRegex',
+-                                unittest.TestCase.assertRaisesRegexp)
++    assertRaisesRegex = unittest.TestCase.assertRaisesRegex
+     def test_empty_list(self):
+         i = _config.ImportableSetting()
+         with self.assertRaisesRegex(ImportError,
+diff --git a/src/gevent/tests/test__close_backend_fd.py b/src/gevent/tests/test__close_backend_fd.py
+index 46406caf7..4fd7f5519 100644
+--- a/src/gevent/tests/test__close_backend_fd.py
++++ b/src/gevent/tests/test__close_backend_fd.py
+@@ -21,8 +21,7 @@ class Test(unittest.TestCase):
+     # NOTE that we extend unittest.TestCase, not greentest.TestCase
+     # Extending the later causes the wrong hub to get used.
+ 
+-    assertRaisesRegex = getattr(unittest.TestCase, 'assertRaisesRegex',
+-                                getattr(unittest.TestCase, 'assertRaisesRegexp'))
++    assertRaisesRegex = unittest.TestCase.assertRaisesRegex
+ 
+     BACKENDS_THAT_SUCCEED_WHEN_FD_CLOSED = (
+         'kqueue',
+diff --git a/src/gevent/tests/test__contextvars.py b/src/gevent/tests/test__contextvars.py
+index 3d6611b9c..10b24968c 100644
+--- a/src/gevent/tests/test__contextvars.py
++++ b/src/gevent/tests/test__contextvars.py
+@@ -36,9 +36,6 @@ def wrapper(*args, **kwargs):
+ 
+ class ContextTest(unittest.TestCase):
+ 
+-    if not hasattr(unittest.TestCase, 'assertRaisesRegex'):
+-        assertRaisesRegex = unittest.TestCase.assertRaisesRegexp
+-
+     def test_context_var_new_1(self):
+         with self.assertRaises(TypeError):
+             contextvars.ContextVar()
