@@ -1,0 +1,19 @@
+diff -up gevent-22.10.2/src/gevent/_ssl3.py.py312 gevent-22.10.2/src/gevent/_ssl3.py
+--- gevent-22.10.2/src/gevent/_ssl3.py.py312	2022-10-31 12:53:52.000000000 -0600
++++ gevent-22.10.2/src/gevent/_ssl3.py	2023-06-26 19:07:10.247869058 -0600
+@@ -50,7 +50,6 @@ from ssl import SSL_ERROR_WANT_READ
+ from ssl import SSL_ERROR_WANT_WRITE
+ from ssl import PROTOCOL_SSLv23
+ from ssl import SSLObject
+-from ssl import match_hostname
+ from ssl import CHANNEL_BINDING_TYPES
+ from ssl import CERT_REQUIRED
+ from ssl import DER_cert_to_PEM_cert
+@@ -680,6 +679,7 @@ class SSLSocket(socket):
+             if not self.server_hostname:
+                 raise ValueError("check_hostname needs server_hostname "
+                                  "argument")
++            from ssl import match_hostname
+             match_hostname(self.getpeercert(), self.server_hostname) # pylint:disable=deprecated-method
+ 
+     if hasattr(SSLObject, '_create'):
