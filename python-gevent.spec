@@ -3,17 +3,13 @@
 %global optflags %(echo %{optflags} -I%{_includedir}/libev)
 
 Name:          python-%{modname}
-Version:       21.12.0
-Release:       5.rv64%{?dist}
+Version:       23.7.0
+Release:       2.rv64_nc%{?dist}
 Summary:       A coroutine-based Python networking library
 
 License:       MIT
 URL:           http://www.gevent.org/
 Source0:       %{pypi_source %{modname} %{version} tar.gz}
-
-# Support Python 3.11
-# Discussion in https://github.com/gevent/gevent/pull/1872.patch
-Patch:         https://github.com/gevent/gevent/compare/master...hroncok:py311b3.patch
 
 BuildRequires: gcc
 BuildRequires: c-ares-devel
@@ -35,10 +31,9 @@ Features include:
 
 %package -n python3-%{modname}
 Summary:       %{summary}
-%{?python_provide:%python_provide python3-%{modname}}
 BuildRequires: python3-devel
 BuildRequires: python3-Cython
-BuildRequires: python3-greenlet-devel >= 1.1.0
+BuildRequires: python3-greenlet-devel >= 2.0.0
 BuildRequires: python3-setuptools
 # For tests
 BuildRequires: python3-dns
@@ -82,8 +77,6 @@ export GEVENTSETUP_EMBED=0
 %install
 export GEVENTSETUP_EMBED=0
 %py3_install
-rm %{buildroot}%{python3_sitearch}/%{modname}/_*2.py
-rm %{buildroot}%{python3_sitearch}/%{modname}/__pycache__/_*2.*
 find %{buildroot} -name '.buildinfo' -delete
 # Correct the permissions.
 find %{buildroot} -name '*.so' -exec chmod 755 {} ';'
@@ -103,6 +96,21 @@ cd src/gevent/tests && GEVENT_FILE=thread %__python3 -mgevent.tests test__*subpr
 %{python3_sitearch}/%{modname}*
 
 %changelog
+* Fri Jul 21 2023 Fedora Release Engineering <releng@fedoraproject.org> - 23.7.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
+
+* Mon Jul 17 2023 Orion Poplawski <orion@nwra.com> - 23.7.0-1
+- Update to 23.7.0
+
+* Tue Jun 27 2023 Orion Poplawski <orion@nwra.com> - 22.10.2-3
+- Add patch to remove match_hostname import
+
+* Thu Jun 15 2023 Python Maint <python-maint@redhat.com> - 22.10.2-2
+- Rebuilt for Python 3.12
+
+* Thu Jun 15 2023 Petr Viktorin <pviktori@redhat.com> - 22.10.2-1
+- Update to 22.10.2
+
 * Tue May 23 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 21.12.0-5.rv64
 - skip failed tests on riscv64.
 
